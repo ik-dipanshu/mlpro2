@@ -52,7 +52,7 @@ def save_object(file_path: str, obj: object) -> None:
         raise NetworkSecurityException(e, sys) from e
 
 
-def load_numpy_array_data(file_path: str) -> np.array:
+def load_numpy_array_data(file_path: str) -> np.ndarray:
     """
     load numpy array data from file
     file_path: str location of file to load

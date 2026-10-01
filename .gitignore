@@ -56,3 +56,5 @@ artifacts
 Artifacts
 logs
 final_model
+mlruns
+mlflow.db
