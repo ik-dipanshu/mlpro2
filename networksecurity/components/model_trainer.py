@@ -25,6 +25,10 @@ from sklearn.ensemble import (
 )
 import mlflow
 import sklearn
+import dagshub
+dagshub.init(repo_owner='ik-dipanshu', repo_name='mlpro2', mlflow=True)
+
+
 
 class ModelTrainer:
     def __init__(self,model_trainer_config:ModelTrainerConfig,data_transformation_artifact:DataTransformationArtifact):
@@ -46,11 +50,11 @@ class ModelTrainer:
             mlflow.log_metric("f1_score",f1_score)
             mlflow.log_metric("precision",precision_score)
             mlflow.log_metric("recall_score",recall_score)
-            mlflow.sklearn.log_model(
-                best_model,
-                "model",
-                skops_trusted_types=["sklearn.tree._tree.Tree"],
-            )
+            # mlflow.sklearn.log_model(
+            #     best_model,
+            #     "model",
+            #     skops_trusted_types=["sklearn.tree._tree.Tree"],
+            # )
 
         
     def train_model(self,X_train,y_train,x_test,y_test):
@@ -124,7 +128,8 @@ class ModelTrainer:
             save_object(self.model_trainer_config.trained_model_file_path,obj=NetworkModel)
             #model pusher
             save_object("final_model/model.pkl",best_model)
-            
+
+     
 
             ## Model Trainer Artifact
             model_trainer_artifact=ModelTrainerArtifact(trained_model_file_path=self.model_trainer_config.trained_model_file_path,
